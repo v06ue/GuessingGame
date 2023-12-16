@@ -14,9 +14,6 @@ function initGame() {
         initSecondLevel(secondLevel, () => initThirdLevel(thirdLevel))
     );
 
-    // initSecondLevel(secondLevel, () => initThirdLevel());
-
-    // initThirdLevel(thirdLevel);
 }
 
 function initFirstLevel(firstLevel, initSecondLevel) {
@@ -258,12 +255,12 @@ function initThirdLevel(thirdLevel) {
     }
 
     function startDragging(event) {
-        const animalElement = event.target;
-        animalElement.setAttribute("data-dragging", "true");
+        const wordElement = event.target;
+        wordElement.setAttribute("data-dragging", "true");
     }
 
     function stopDragging(event) {
-        const animalElement = event.target;
-        animalElement.removeAttribute("data-dragging");
+        const wordElement = event.target;
+        wordElement.removeAttribute("data-dragging");
     }
 }
