@@ -13,8 +13,8 @@ const levels = [
             },
             {
                 stage: 2,
-                task: "Найдите всех пингвинов:",
-                items: ["pinguin-1", "pinguin-2", "pinguin-3", "pinguin-4"],
+                task: "Найдите всех бабочек:",
+                items: ["butterfly-1", "butterfly-2", "butterfly-3", "butterfly-4"],
             },
         ],
     },
