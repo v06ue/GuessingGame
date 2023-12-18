@@ -1,20 +1,35 @@
 const levels = [
     {
+        items: [
+            "fake-1",
+            "fake-2",
+            "fake-3",
+            "fake-4",
+            "fake-5",
+            "fake-6",
+            "fake-7",
+            "fake-8",
+            "fake-9",
+            "fake-10",
+            "fake-11",
+            "fake-12",
+            "fake-13",
+        ],
         stages: [
             {
                 stage: 0,
                 task: "Найдите всех кошек:",
-                items: ["cat-1", "cat-2", "cat-3", "cat-4"],
+                taskItems: ["cat-1", "cat-2", "cat-3", "cat-4"],
             },
             {
                 stage: 1,
                 task: "Найдите всех собак:",
-                items: ["dog-1", "dog-2", "dog-3", "dog-4"],
+                taskItems: ["dog-1", "dog-2", "dog-3", "dog-4"],
             },
             {
                 stage: 2,
-                task: "Найдите всех бабочек:",
-                items: ["butterfly-1", "butterfly-2", "butterfly-3", "butterfly-4"],
+                task: "Найдите всех пингвинов:",
+                taskItems: ["pinguin-1", "pinguin-2", "pinguin-3", "pinguin-4"],
             },
         ],
     },

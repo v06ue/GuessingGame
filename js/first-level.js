@@ -34,42 +34,84 @@ class FirstLevel {
 
     placeImages() {
         const fieldElement = document.querySelector(".first-level-field");
-        levels[0].stages.forEach(({ stage, items }) => {
-            items.forEach((imgName) => {
-                const img = document.createElement("img");
 
-                const randClassNameIndex = Math.floor(
-                    Math.random() * itemsSizes.length
-                );
-                const sizeClassName = `first-level-animal--${itemsSizes[randClassNameIndex]}`;
+        const images = [];
+        const imgsPlaces = [];
 
-                const randAnimationIndex = Math.floor(
-                    Math.random() * imagesAnimations.length
-                );
-                const animationClassName = `first-level-animal--${imagesAnimations[randAnimationIndex]}`;
+        const randAnswersCount = Math.floor(Math.random() * 3) + 1;
 
-                img.className = `first-level-animal ${sizeClassName} ${animationClassName}`;
+        const shuffledTaskItems = this.shuffle(
+            levels[0].stages[this.stage.stage].taskItems
+        );
+        const shuffledFakeItems = this.shuffle(levels[0].items);
 
-                img.src = `./img/levels/first-level/${imgName}.png`;
+        for (let i = 0; i < randAnswersCount; i++) {
+            images.push(shuffledTaskItems[i]);
+        }
 
-                img.style.left = `${
-                    Math.random() * fieldElement.clientWidth
-                }px`;
+        const restCount = 12 - images.length;
 
-                img.style.top = `${
-                    Math.random() * fieldElement.clientHeight
-                }px`;
+        for (let i = 0; i < restCount; i++) {
+            images.push(shuffledFakeItems[i]);
+        }
 
-                img.style.transform = `rotate(${Math.floor(
-                    Math.random() * 360
-                )}deg)`;
+        images.forEach((imgName, index) => {
+            const img = document.createElement("img");
 
-                if (stage === this.stage.stage) {
-                    img.setAttribute("data-img-stage", stage);
+            const randClassNameIndex = Math.floor(
+                Math.random() * itemsSizes.length
+            );
+            const sizeClassName = `first-level-animal--${itemsSizes[randClassNameIndex]}`;
+
+            const randAnimationIndex = Math.floor(
+                Math.random() * imagesAnimations.length
+            );
+            const animationClassName = `first-level-animal--${imagesAnimations[randAnimationIndex]}`;
+
+            img.className = `first-level-animal ${sizeClassName} ${animationClassName}`;
+
+            img.src = `./img/levels/first-level/${imgName}.png`;
+
+            let top = Math.random() * fieldElement.clientHeight;
+            let left = Math.random() * fieldElement.clientWidth;
+
+            if (imgsPlaces.length > 0) {
+                let isPlaced = false;
+                while (!isPlaced) {
+                    top = Math.random() * fieldElement.clientHeight;
+                    left = Math.random() * fieldElement.clientWidth;
+                    for (let i = 0; i < imgsPlaces.length; i++) {
+                        const point = imgsPlaces[i];
+                        if (
+                            !(
+                                Math.abs(point.top - top) > 150 ||
+                                Math.abs(point.left - left) > 150
+                            )
+                        ) {
+                            break;
+                        }
+
+                        if (i === imgsPlaces.length - 1) {
+                            isPlaced = true;
+                        }
+                    }
                 }
+            }
 
-                fieldElement.appendChild(img);
-            });
+            imgsPlaces.push({ top, left });
+
+            img.style.top = `${top}px`;
+            img.style.left = `${left}px`;
+
+            img.style.transform = `rotate(${Math.floor(
+                Math.random() * 360
+            )}deg)`;
+
+            if (index < randAnswersCount) {
+                img.setAttribute("data-img-stage", this.stage.stage);
+            }
+
+            fieldElement.appendChild(img);
         });
     }
 
@@ -83,5 +125,9 @@ class FirstLevel {
         );
 
         return visibleImgs.length === 0;
+    }
+
+    shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
     }
 }

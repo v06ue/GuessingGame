@@ -1,5 +1,5 @@
 const animalSizes = ["small", "medium", "large"];
-const animalsAnimations = ["move", "circle", "jump", "shake"];
+const animalsAnimations = ["move", "circle", "jump", "shake", "disappear"];
 
 class SecondLevel {
     stage = 0;

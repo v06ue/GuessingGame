@@ -1,5 +1,5 @@
 class GameStorage {
-    saveResult({ date, duration, username, score }) {
+    saveResult({ date, duration, username, score, mistakes }) {
         const results = this.getResults();
 
         results.push({
@@ -7,6 +7,7 @@ class GameStorage {
             score,
             username,
             duration,
+            mistakes,
         });
 
         localStorage.setItem("quest-rating", JSON.stringify(results));
@@ -21,20 +22,29 @@ class GameStorage {
 
         const results = this.getResults();
 
-        const sortedResults = results.sort((a, b) => a.duration - b.duration);
+        const sortedResults = results.sort((a, b) => {
+            if (a.mistakes !== b.mistakes) {
+                return a.mistakes - b.mistakes;
+            } else {
+                return a.duration - b.duration;
+            }
+        });
 
-        sortedResults.forEach(({ date, score, duration, username }, index) => {
-            const resultElement = `
+        sortedResults.forEach(
+            ({ date, score, duration, username, mistakes }, index) => {
+                const resultElement = `
             <tr>
               <td>${index + 1}</td>
               <td>${username}</td>
               <td>${date}</td>
               <td>${duration}</td>
               <td>${score}</td>
+              <td>${mistakes}</td>
               </tr>
             `;
 
-            tbodyElement.innerHTML += resultElement;
-        });
+                tbodyElement.innerHTML += resultElement;
+            }
+        );
     }
 }

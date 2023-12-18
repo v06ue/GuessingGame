@@ -4,9 +4,14 @@ class Game {
     time = 0;
     totalTime = 0;
     startDate = new Date().toLocaleDateString();
+    mistakes = 0;
 
     increaseTime() {
         this.time++;
+    }
+
+    increaseMistakes() {
+        this.mistakes++;
     }
 
     resetTime() {
@@ -33,9 +38,11 @@ class Game {
     displayGameParams() {
         const scoreContainer = document.querySelector("[data-score]");
         const timeContainer = document.querySelector("[data-time]");
+        const mistakesContainer = document.querySelector("[data-mistakes]");
 
         scoreContainer.innerHTML = this.score;
         timeContainer.innerHTML = this.time;
+        mistakesContainer.innerHTML = this.mistakes;
     }
 
     displayStageResult(isLevelFinished) {
@@ -71,6 +78,9 @@ class Game {
                     </div>
                     <div class="game-result-text">
                         Количество очков: <span data-result-score>${this.score}</span>
+                    </div>
+                    <div class="game-result-text">
+                        Ошибки: <span data-result-mistakes>${this.mistakes}</span>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
 
 const game = new Game();
+game.displayGameParams();
 
 initGame();
 
@@ -13,7 +14,6 @@ function initGame() {
     initFirstLevel(firstLevel, () =>
         initSecondLevel(secondLevel, () => initThirdLevel(thirdLevel))
     );
-
 }
 
 function initFirstLevel(firstLevel, initSecondLevel) {
@@ -103,13 +103,6 @@ function initSecondLevel(secondLevel, initThirdLevel) {
             return;
         }
 
-        const locationValue = locationContainer.dataset.location;
-        const animalLocationValue = animal.dataset.location;
-
-        if (locationValue !== animalLocationValue) {
-            return;
-        }
-
         const clonedAnimal = animal.cloneNode(true);
         clonedAnimal.removeAttribute("data-dragging");
 
@@ -123,6 +116,15 @@ function initSecondLevel(secondLevel, initThirdLevel) {
         clonedAnimal.className = `second-level-animal--disabled ${
             animal.className.split(" ")[1]
         }`;
+
+        const locationValue = locationContainer.dataset.location;
+        const animalLocationValue = animal.dataset.location;
+
+        if (locationValue !== animalLocationValue) {
+            game.increaseMistakes();
+            game.displayGameParams();
+            clonedAnimal.classList.add("second-level-animal--mistake");
+        }
 
         locationContainer.appendChild(clonedAnimal);
 
@@ -203,7 +205,7 @@ function initThirdLevel(thirdLevel) {
         const wordsContainer = event.target.closest("[data-words-container]");
         const word = document.querySelector("[data-dragging]");
 
-        if (!wordsContainer || !word || !word.dataset.correct) {
+        if (!wordsContainer || !word) {
             return;
         }
 
@@ -212,7 +214,15 @@ function initThirdLevel(thirdLevel) {
 
         clonedWord.setAttribute("draggable", "false");
 
-        clonedWord.className = "word word--disabled";
+        clonedWord.className = "word";
+
+        if (word.dataset.correct) {
+            clonedWord.classList.add("word--correct");
+        } else {
+            game.increaseMistakes();
+            game.displayGameParams();
+            clonedWord.classList.add("word--mistake");
+        }
 
         wordsContainer.appendChild(clonedWord);
 
@@ -244,10 +254,11 @@ function initThirdLevel(thirdLevel) {
 
             const storage = new GameStorage();
             storage.saveResult({
+                username,
                 date: game.startDate,
                 duration: game.totalTime,
                 score: game.score,
-                username,
+                mistakes: game.mistakes,
             });
 
             game.showGameResult(storage.getResults());
@@ -255,12 +266,12 @@ function initThirdLevel(thirdLevel) {
     }
 
     function startDragging(event) {
-        const wordElement = event.target;
-        wordElement.setAttribute("data-dragging", "true");
+        const animalElement = event.target;
+        animalElement.setAttribute("data-dragging", "true");
     }
 
     function stopDragging(event) {
-        const wordElement = event.target;
-        wordElement.removeAttribute("data-dragging");
+        const animalElement = event.target;
+        animalElement.removeAttribute("data-dragging");
     }
 }
