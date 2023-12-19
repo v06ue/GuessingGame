@@ -19,11 +19,6 @@ body {
     letter-spacing: 1px;
 }
 
-body.dark-theme {
-    background: #333;
-    background: linear-gradient(to left, #333, #151313);
-}
-
 ul {
     margin: 0;
     padding: 0;
