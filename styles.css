@@ -286,12 +286,12 @@ ul {
 
 .word--correct {
     pointer-events: none;
-    background-color: #20e000;
+    background-color: #95f085;
 }
 
 .word--mistake {
     pointer-events: none;
-    background-color: #ff4949;
+    background-color: #f27777;
 }
 
 .words-container {
