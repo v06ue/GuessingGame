@@ -140,6 +140,12 @@ ul {
     position: absolute;
 }
 
+.second-level-animal--mistake {
+    border-radius: 60px;
+    box-shadow: 0 0 20px 1px #ff4b4b;
+    padding: 10px;
+}
+
 .second-level-animal--small {
     width: 120px;
     height: 120px;
