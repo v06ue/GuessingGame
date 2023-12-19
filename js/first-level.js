@@ -38,7 +38,7 @@ class FirstLevel {
         const images = [];
         const imgsPlaces = [];
 
-        const randAnswersCount = Math.floor(Math.random() * 3) + 1;
+        const randAnswersCount = Math.floor(Math.random() * 4) + 1;
 
         const shuffledTaskItems = this.shuffle(
             levels[0].stages[this.stage.stage].taskItems
