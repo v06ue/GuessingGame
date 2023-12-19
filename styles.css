@@ -1,5 +1,6 @@
 :root {
-    --bg-gradient: linear-gradient(to left, #cd54c7, #e0c2ed);
+    --bg-color: rgb(128, 246, 211);
+    --bg-gradient: linear-gradient(to left, #8f94fb, #4e54c8);
     --text-color: #ffffff;
 }
 
@@ -11,6 +12,7 @@ body {
 }
 
 body {
+    background: var(--bg-color);
     background: var(--bg-gradient);
     color: var(--text-color);
     font-family: "Exo 2", sans-serif;
@@ -72,18 +74,18 @@ ul {
 }
 
 .first-level-animal--small {
-    width: 115px;
-    height: 115px;
+    width: 100px;
+    height: 100px;
 }
 
 .first-level-animal--medium {
-    width: 145px;
-    height: 145px;
+    width: 125px;
+    height: 125px;
 }
 
 .first-level-animal--large {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
 }
 
 .alert {
@@ -91,10 +93,9 @@ ul {
     margin: 0 auto;
     margin-top: 100px;
     text-align: center;
-    background-color: rgb(201, 32, 125);
-    padding: 25px 0;
-    border-radius: 35px;
-    color: rgb(255, 255, 255);
+    background-color: green;
+    padding: 15px 0;
+    color: white;
 }
 
 .stage-result-title {
@@ -169,7 +170,7 @@ ul {
 
 .first-level-animal--move,
 .second-level-animal--move {
-    animation: move 12s linear infinite;
+    animation: move 4s linear infinite;
 }
 
 .first-level-animal--circle,
@@ -187,7 +188,8 @@ ul {
     animation: jump 1s linear infinite;
 }
 
-.first-level-animal--disappear {
+.first-level-animal--disappear,
+.second-level-animal--disappear {
     animation: disappear 2s ease-in infinite;
 }
 
@@ -211,13 +213,16 @@ ul {
 
 @keyframes move {
     0% {
-        left: 0;
+        transform: translateX(0);
     }
-    50% {
-        left: calc(100% - 100px);
+    25% {
+        transform: translateX(-100px);
+    }
+    75% {
+        transform: translateX(100px);
     }
     100% {
-        left: 0;
+        transform: translateX(0);
     }
 }
 
@@ -270,9 +275,9 @@ ul {
 }
 
 .word {
-    background: radial-gradient(circle, #faeb7b, #e1a5f7);
+    background-color: #eee;
     padding: 8px 10px;
-    border: 1px solid #000000;
+    border: 1px solid #7d7d7d;
     color: black;
     font-size: 20px;
     text-align: center;
@@ -281,26 +286,29 @@ ul {
 }
 
 .word:hover {
-    transform: rotate(-3deg);
+    transform: rotate(-1deg);
 }
 
-.word--disabled {
+.word--correct {
     pointer-events: none;
-    background: radial-gradient(circle, #59f260, #e1a5f7);
-    align-self: flex-start;
+    background-color: #20e000;
+}
+
+.word--mistake {
+    pointer-events: none;
+    background-color: #ff4949;
 }
 
 .words-container {
     height: 300px;
     width: 100%;
-    background-color: #f2b0df55;
-    border: 1px solid #000000;
+    background-color: #cdcdcd;
     padding: 15px;
     border-radius: 20px;
     position: relative;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    align-items: center;
+    grid-template-rows: repeat(3, 41.6px);
     gap: 10px;
 }
 
@@ -320,9 +328,9 @@ ul {
 }
 
 .game-result-alert {
-    background-color: #65cf6c;
+    background-color: #15bf15;
     color: white;
-    border: 1px solid rgb(58, 152, 52);
+    border: 1px solid white;
     border-radius: 20px;
     margin-top: 50px;
     padding: 15px 30px;
@@ -356,25 +364,26 @@ ul {
 }
 
 .next-level-button {
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid green;
     font-size: 15px;
     padding: 8px 12px;
     font-family: inherit;
     font-weight: 700;
     border-radius: 20px;
-    color: rgb(0, 0, 0);
-    background-color: #b9fff9;
+    color: green;
+    background-color: #b9ffb9;
     transition: background-color 0.2s ease;
     cursor: pointer;
 }
 
 .next-level-button:hover {
-    background-color: #5bd2e9;
+    background-color: #73ff90;
 }
 
 .start-link {
     display: block;
     font-size: inherit;
+    color: inherit;
     font-family: inherit;
     text-align: center;
     letter-spacing: inherit;
@@ -384,7 +393,7 @@ ul {
     font-weight: 700;
     width: 100%;
     text-decoration: none;
-    background-color: #c9207d;
+    background-color: #15bf15;
     transition: background-color 0.2s ease;
     border: none;
     padding: 8px 16px;
@@ -393,7 +402,7 @@ ul {
 }
 
 .start-link:hover {
-    background-color: #a31161;
+    background-color: #0f9b0f;
 }
 
 .rating-start-link {
@@ -415,7 +424,7 @@ ul {
     margin: auto;
     padding: 20px;
     border-radius: 20px;
-    background-color: #4cbcb3;
+    background-color: #957a7a;
 }
 
 .settings-label {
@@ -431,7 +440,7 @@ ul {
 .name-input {
     color: black;
     padding: 10px 15px;
-    border: 1px solid #216d7e;
+    border: 1px solid #817d7d;
     border-radius: 20px;
     font-size: 18px;
     outline: none;
@@ -479,14 +488,14 @@ td {
 }
 
 th {
-    background-color: #812271;
+    background-color: #313b94;
     color: #ffffff;
     font-size: 17px;
 }
 
 tr,
 td {
-    color: #000000;
+    color: #fff;
     text-align: center;
     font-size: 16px;
 }
